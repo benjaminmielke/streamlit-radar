@@ -5,7 +5,7 @@ st.set_page_config(layout='wide', page_title='Radar Regions', page_icon='https:/
 placeholder1 = st.empty()
 placeholder2 = st.empty()
 st.sidebar.title('Select Region')
-if st.sidebar.checkbox('Europe Region'):
+if st.sidebar.checkbox('Europe'):
     if st.sidebar.button('Europe'):
         placeholder1.title("Europe")
         placeholder2.markdown('<iframe src="https://www.rainviewer.com/map.html?loc=55.9984,22.4121,4&oFa=1&oC=1&oU=1&oCS=1&oF=1&oAP=1&rmt=1&c=5&o=49&lm=0&th=1&sm=0&sn=1" width="100%" frameborder="0" style="border:0;height:88vh;" allowfullscreen></iframe>', unsafe_allow_html=True)
