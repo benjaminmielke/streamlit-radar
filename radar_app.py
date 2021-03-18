@@ -5,6 +5,10 @@ st.set_page_config(layout='wide', page_title='Radar Regions', page_icon='https:/
 placeholder1 = st.empty()
 placeholder2 = st.empty()
 st.sidebar.title('Select Region')
+
+region = st.sidebar.selectbox('OK1',
+                              'Europe', 'Northern Europe', 'Eastern Europe', 'South UK', 'Iberian Peninsula', 'France', 'Germany/Netherlands', 'Italy', 'Aegean Sea', 'Moscow')
+
 if st.sidebar.checkbox('Europe'):
     if st.sidebar.button('Europe'):
         placeholder1.title("Europe")
