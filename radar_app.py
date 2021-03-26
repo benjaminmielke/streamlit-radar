@@ -5,7 +5,7 @@ import bs4 as bs
 st.set_page_config(layout='wide', page_title='Radar Regions', page_icon='https://p1.hiclipart.com/preview/994/283/642/rainmeter-tabbed-dock-grey-and-yellow-lightning-icon-png-clipart.jpg')
 
 
-@st.cache
+# @st.cache
 def create_dct(lst_icao):
     '''
 
