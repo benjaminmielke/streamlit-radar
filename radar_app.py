@@ -5,7 +5,7 @@ import bs4 as bs
 st.set_page_config(layout='wide', page_title='Radar Regions', page_icon='https://p1.hiclipart.com/preview/994/283/642/rainmeter-tabbed-dock-grey-and-yellow-lightning-icon-png-clipart.jpg')
 
 
-# @st.cache
+@st.cache
 def create_dct(lst_icao):
     '''
 
@@ -13,7 +13,7 @@ def create_dct(lst_icao):
     dct = {}
     for a in range(0, len(lst_icao)):
         url1 = f'http://www.gcmap.com/airport/{lst_icao[a]}'
-        soup = bs.BeautifulSoup(requests.get(url1).text, 'lxml')
+        soup = bs.BeautifulSoup(requests.get(url1).text, 'html.parser')
 
         city = soup.find('span', {'class': 'locality'}).text
         #region = soup.find('span', {'class': 'region'}).text
