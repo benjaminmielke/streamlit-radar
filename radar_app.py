@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 import bs4 as bs
-import datetime
+# import datetime
 
 st.set_page_config(layout='wide', page_title='Radar Regions', page_icon='https://p1.hiclipart.com/preview/994/283/642/rainmeter-tabbed-dock-grey-and-yellow-lightning-icon-png-clipart.jpg')
 
@@ -78,11 +78,11 @@ def region_radar(coords, zoom):
     ph_iframe.markdown(f'<iframe src="https://www.rainviewer.com/map.html?loc={coords},{zoom}&oFa=1&oC=1&oU=1&oCS=1&oF=1&oAP=0&rmt=1&c=5&o=49&lm=0&th=0&sm=0&sn=1" width="100%" frameborder="3" style="border:2;height:80vh;" allowfullscreen></iframe>', unsafe_allow_html=True)
 
 
-def clock(dct, icao_key):
-    '''
-    '''
-    local_adjustment = int((dct.get(icao_key)).get("Timezone")[4:6])
-    return (datetime.datetime.utcnow() + datetime.timedelta(hours=local_adjustment)).strftime("%H:%M:%S")
+# def clock(dct, icao_key):
+#     '''
+#     '''
+#     local_adjustment = int((dct.get(icao_key)).get("Timezone")[4:6])
+#     return (datetime.datetime.utcnow() + datetime.timedelta(hours=local_adjustment)).strftime("%H:%M:%S")
 
 
 
