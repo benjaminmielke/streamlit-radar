@@ -1,9 +1,8 @@
 import streamlit as st
 import requests
 import bs4 as bs
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials
-# import webbrowser
+import webbrowser
+import pandas as pd
 
 # Build the app
 st.set_page_config(layout='wide', page_title='Radar Regions', page_icon='https://p1.hiclipart.com/preview/994/283/642/rainmeter-tabbed-dock-grey-and-yellow-lightning-icon-png-clipart.jpg')
@@ -38,7 +37,6 @@ color: #000000
 """,
     unsafe_allow_html=True,
 )
-
 
 
 @st.cache
@@ -77,30 +75,23 @@ def create_dct(lst_icao):
 def connect_gs():
     '''
     '''
-    # use creds to create a client to interact with the Google Drive API
-    scope = ['https://spreadsheets.google.com/feeds',
-             'https://www.googleapis.com/auth/drive']
-    creds = ServiceAccountCredentials.from_json_keyfile_name('quickstart-314213-bba5143b1687.json', scope)
-    client = gspread.authorize(creds)
-
-    # Find a workbook by name and open the first sheet
-    # Make sure you use the right name here.
-    sheet = client.open("Duty_Airports_Master_List").sheet1
+    # Import Master list
+    df_master_list = pd.read_csv(r'C:\Users\okiem\github\streamlit-radar\Duty_Regions_Master_List.csv')
 
     dct = {}
-    dct['jgp'] = sheet.col_values(1)[1:]
-    dct['ok1'] = sheet.col_values(2)[1:]
-    dct['ok2'] = sheet.col_values(3)[1:]
-    dct['ok3'] = sheet.col_values(4)[1:]
-    dct['ok4'] = sheet.col_values(5)[1:]
-    dct['sg1'] = sheet.col_values(6)[1:]
-    dct['sg2'] = sheet.col_values(7)[1:]
-    dct['sg3'] = sheet.col_values(8)[1:]
-    dct['sg4'] = sheet.col_values(9)[1:]
-    dct['sgd'] = sheet.col_values(10)[1:]
-    dct['sja'] = sheet.col_values(11)[1:]
-    dct['sjd'] = sheet.col_values(12)[1:]
-    dct['sjn'] = sheet.col_values(13)[1:]
+    dct['jgp'] = [x for x in df_master_list['JGP'] if str(x) != 'nan']
+    dct['ok1'] = [x for x in df_master_list['OK1'] if str(x) != 'nan']
+    dct['ok2'] = [x for x in df_master_list['OK2'] if str(x) != 'nan']
+    dct['ok3'] = [x for x in df_master_list['OK3'] if str(x) != 'nan']
+    dct['ok4'] = [x for x in df_master_list['OK4'] if str(x) != 'nan']
+    dct['sg1'] = [x for x in df_master_list['SG1'] if str(x) != 'nan']
+    dct['sg2'] = [x for x in df_master_list['SG2'] if str(x) != 'nan']
+    dct['sg3'] = [x for x in df_master_list['SG3'] if str(x) != 'nan']
+    dct['sg4'] = [x for x in df_master_list['SG4'] if str(x) != 'nan']
+    dct['sgd'] = [x for x in df_master_list['SGD'] if str(x) != 'nan']
+    dct['sja'] = [x for x in df_master_list['SJA'] if str(x) != 'nan']
+    dct['sjd'] = [x for x in df_master_list['SJD'] if str(x) != 'nan']
+    dct['sjn'] = [x for x in df_master_list['SJN'] if str(x) != 'nan']
 
     return dct
 
@@ -126,9 +117,9 @@ def satellite_button(icao_key, dct):
     '''
     ph_title.title(f'{icao_key} - {(dct.get(icao_key)).get("City")}, {(dct.get(icao_key)).get("Country")}')
     ph_subtitle.markdown(f'**Coordinates:** {(dct.get(icao_key)).get("Lat")}, {(dct.get(icao_key)).get("Lon")}  **Timezone:** {(dct.get(icao_key)).get("Timezone")}')
-    ph_iframe.markdown(f'<iframe src="https://www.tsohost.com/assets/uploads/blog/under-construction-pages-1-image-library.jpg" width="100%" frameborder="0" style="border:0;height:80vh;" allowfullscreen></iframe>', unsafe_allow_html=True)
-    # url = 'https://rammb-slider.cira.colostate.edu/?sat=himawari&sec=full_disk&x=10576&y=7952&z=1&angle=0&im=6&ts=3&st=0&et=0&speed=130&motion=loop&maps%5Bborders%5D=white&maps%5Bairports%5D=pink&lat=0&p%5B0%5D=geocolor&p%5B1%5D=band_13&opacity%5B0%5D=1&opacity%5B1%5D=0.15&pause=0&slider=-1&hide_controls=0&mouse_draw=0&follow_feature=0&follow_hide=0&s=rammb-slider&draw_color=FFD700&draw_width=6'
-    # webbrowser.open_new_tab(url)
+    # ph_iframe.markdown(f'<iframe src="https://www.tsohost.com/assets/uploads/blog/under-construction-pages-1-image-library.jpg" width="100%" frameborder="0" style="border:0;height:80vh;" allowfullscreen></iframe>', unsafe_allow_html=True)
+    url = 'https://rammb-slider.cira.colostate.edu/?sat=himawari&sec=full_disk&x=10576&y=7952&z=1&angle=0&im=6&ts=3&st=0&et=0&speed=130&motion=loop&maps%5Bborders%5D=white&maps%5Bairports%5D=pink&lat=0&p%5B0%5D=geocolor&p%5B1%5D=band_13&opacity%5B0%5D=1&opacity%5B1%5D=0.15&pause=0&slider=-1&hide_controls=0&mouse_draw=0&follow_feature=0&follow_hide=0&s=rammb-slider&draw_color=FFD700&draw_width=6'
+    webbrowser.open_new_tab(url)
 
 
 def region_lightning(coords, zoom):
@@ -191,6 +182,23 @@ dct_sgd = create_dct(lst_sgd)
 # dct_sja = create_dct(lst_sja)
 dct_sjd = create_dct(lst_sjd)
 dct_sjn = create_dct(lst_sjn)
+#
+# import numpy as np
+# st.markdown(lst_sgd)
+# st.markdown(list(dct_sgd.keys()))
+# st.markdown(np.setdiff1d(lst_sgd, list(dct_sgd.keys())))
+# st.markdown('-----')
+# st.markdown(lst_ok2)
+# st.markdown(list(dct_ok2.keys()))
+# st.markdown(np.setdiff1d(list(dct_ok2.keys()), lst_ok2))
+# st.markdown('-----')
+# st.markdown(lst_sg4)
+# st.markdown(list(dct_sg4.keys()))
+# st.markdown(np.setdiff1d(lst_sg4, list(dct_sg4.keys())))
+# st.markdown('-----')
+# st.markdown(lst_sg1)
+# st.markdown(list(dct_sg1.keys()))
+# st.markdown(np.setdiff1d(lst_sg1, list(dct_sg1.keys())))
 
 # Create sidebar scroll options
 create_scroll_item(region, 'JGP', dct_jgp, lst_jgp)
