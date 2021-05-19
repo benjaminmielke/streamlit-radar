@@ -76,7 +76,7 @@ def connect_gs():
     '''
     '''
     # Import Master list
-    df_master_list = pd.read_csv(r'C:\Users\okiem\github\streamlit-radar\Duty_Regions_Master_List.csv')
+    df_master_list = pd.read_csv('Duty_Regions_Master_List.csv')
 
     dct = {}
     dct['jgp'] = [x for x in df_master_list['JGP'] if str(x) != 'nan']
