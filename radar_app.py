@@ -3,7 +3,7 @@ import requests
 import bs4 as bs
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
-import webbrowser
+# import webbrowser
 
 # Build the app
 st.set_page_config(layout='wide', page_title='Radar Regions', page_icon='https://p1.hiclipart.com/preview/994/283/642/rainmeter-tabbed-dock-grey-and-yellow-lightning-icon-png-clipart.jpg')
@@ -126,9 +126,9 @@ def satellite_button(icao_key, dct):
     '''
     ph_title.title(f'{icao_key} - {(dct.get(icao_key)).get("City")}, {(dct.get(icao_key)).get("Country")}')
     ph_subtitle.markdown(f'**Coordinates:** {(dct.get(icao_key)).get("Lat")}, {(dct.get(icao_key)).get("Lon")}  **Timezone:** {(dct.get(icao_key)).get("Timezone")}')
-    # ph_iframe.markdown(f'<iframe src="https://www.tsohost.com/assets/uploads/blog/under-construction-pages-1-image-library.jpg" width="100%" frameborder="0" style="border:0;height:80vh;" allowfullscreen></iframe>', unsafe_allow_html=True)
-    url = 'https://rammb-slider.cira.colostate.edu/?sat=himawari&sec=full_disk&x=10576&y=7952&z=1&angle=0&im=6&ts=3&st=0&et=0&speed=130&motion=loop&maps%5Bborders%5D=white&maps%5Bairports%5D=pink&lat=0&p%5B0%5D=geocolor&p%5B1%5D=band_13&opacity%5B0%5D=1&opacity%5B1%5D=0.15&pause=0&slider=-1&hide_controls=0&mouse_draw=0&follow_feature=0&follow_hide=0&s=rammb-slider&draw_color=FFD700&draw_width=6'
-    webbrowser.open_new_tab(url)
+    ph_iframe.markdown(f'<iframe src="https://www.tsohost.com/assets/uploads/blog/under-construction-pages-1-image-library.jpg" width="100%" frameborder="0" style="border:0;height:80vh;" allowfullscreen></iframe>', unsafe_allow_html=True)
+    # url = 'https://rammb-slider.cira.colostate.edu/?sat=himawari&sec=full_disk&x=10576&y=7952&z=1&angle=0&im=6&ts=3&st=0&et=0&speed=130&motion=loop&maps%5Bborders%5D=white&maps%5Bairports%5D=pink&lat=0&p%5B0%5D=geocolor&p%5B1%5D=band_13&opacity%5B0%5D=1&opacity%5B1%5D=0.15&pause=0&slider=-1&hide_controls=0&mouse_draw=0&follow_feature=0&follow_hide=0&s=rammb-slider&draw_color=FFD700&draw_width=6'
+    # webbrowser.open_new_tab(url)
 
 
 def region_lightning(coords, zoom):
