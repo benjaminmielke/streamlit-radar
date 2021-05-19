@@ -162,7 +162,7 @@ def create_scroll_item(region, duty, dct, lst):
 
 dct_duty = connect_gs()
 
-st.secrets['type']
+st.markdown(st.secrets['type'])
 
 # Build duty lists
 lst_jgp = dct_duty.get('jgp')
