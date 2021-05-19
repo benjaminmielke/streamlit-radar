@@ -80,7 +80,7 @@ def connect_gs():
     # use creds to create a client to interact with the Google Drive API
     scope = ['https://spreadsheets.google.com/feeds',
              'https://www.googleapis.com/auth/drive']
-    creds = ServiceAccountCredentials.from_json_keyfile_name(r'C:\Users\okiem\OneDrive\Desktop\quickstart-314213-bba5143b1687.json', scope)
+    creds = ServiceAccountCredentials.from_json_keyfile_name('quickstart-314213-bba5143b1687.json', scope)
     client = gspread.authorize(creds)
 
     # Find a workbook by name and open the first sheet
