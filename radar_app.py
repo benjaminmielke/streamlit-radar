@@ -62,6 +62,9 @@ def create_dct(lst_icao):
                 pass
         except AttributeError:
             pass
+        except IndexError:
+            pass
+       
 
         try:
             dct[f'{lst_icao[a]}'] = {'City': city, 'Country': country, 'Lat': round(float(lat), 2), 'Lon': round(float(lon), 2), 'Elevation': elev, 'Timezone': f'UTC{tz}'}
