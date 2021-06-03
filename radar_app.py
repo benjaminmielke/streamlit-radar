@@ -71,7 +71,7 @@ def create_dct(lst_icao):
     return dct
 
 
-@st.cache
+
 def connect_gs():
     '''
     '''
